@@ -92,6 +92,11 @@ const Index = () => {
               <input
                 type="text"
                 placeholder="Search books..."
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    navigate(`/?tab=library&view=browse&q=${e.currentTarget.value}`);
+                  }
+                }}
                 className="w-full pl-10 pr-4 py-3 bg-gray-100 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
