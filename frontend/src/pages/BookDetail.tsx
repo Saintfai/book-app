@@ -61,7 +61,7 @@ const BookDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 max-w-md mx-auto flex flex-col">
+      <div className="min-h-screen bg-gray-50 max-w-md md:max-w-5xl mx-auto flex flex-col">
         <header className="bg-white shadow-sm border-b border-gray-100 px-4 py-4 flex items-center">
           <button onClick={() => navigate(-1)} className="p-2 -ml-2 text-gray-600 hover:text-gray-800 transition-colors">
             <ArrowLeft size={24} />
@@ -77,7 +77,7 @@ const BookDetail = () => {
 
   if (error || !book) {
     return (
-      <div className="min-h-screen bg-gray-50 max-w-md mx-auto flex flex-col">
+      <div className="min-h-screen bg-gray-50 max-w-md md:max-w-5xl mx-auto flex flex-col">
         <header className="bg-white shadow-sm border-b border-gray-100 px-4 py-4 flex items-center">
           <button onClick={() => navigate(-1)} className="p-2 -ml-2 text-gray-600 hover:text-gray-800 transition-colors">
             <ArrowLeft size={24} />
@@ -99,7 +99,7 @@ const BookDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 max-w-md mx-auto flex flex-col pb-20">
+    <div className="min-h-screen bg-gray-50 max-w-md md:max-w-5xl mx-auto flex flex-col pb-20 md:pb-6">
       <header className="bg-white shadow-sm border-b border-gray-100 px-4 py-4 flex items-center sticky top-0 z-10">
         <button onClick={() => navigate(-1)} className="p-2 -ml-2 text-gray-600 hover:text-gray-800 transition-colors">
           <ArrowLeft size={24} />
@@ -107,20 +107,26 @@ const BookDetail = () => {
         <h1 className="text-xl font-bold text-gray-800 ml-2 truncate">Book Details</h1>
       </header>
 
-      <main className="flex-1 px-4 py-6">
+      <main className="flex-1 px-4 md:px-8 py-6">
+        <div className="md:flex md:gap-8">
+          {/* Left Column: Cover */}
+          <div className="md:w-1/3 shrink-0">
         {/* Cover Placeholder */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden mb-6">
           <div className="aspect-[3/2] bg-gradient-to-br from-blue-100 to-purple-100 relative flex items-center justify-center">
             <BookOpen className="text-blue-500 opacity-80" size={64} />
           </div>
         </div>
+        </div>
 
+        {/* Right Column: Details & Actions */}
+        <div className="md:w-2/3 flex flex-col justify-center">
         {/* Title and Author */}
-        <div className="mb-6 text-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2 leading-tight">{book.title}</h2>
-          <p className="text-lg text-gray-600 mb-4">by {book.author}</p>
+        <div className="mb-6 text-center md:text-left">
+          <h2 className="text-2xl md:text-4xl font-bold text-gray-800 mb-2 leading-tight">{book.title}</h2>
+          <p className="text-lg md:text-xl text-gray-600 mb-4">by {book.author}</p>
           
-          <div className="flex items-center justify-center space-x-2">
+          <div className="flex items-center justify-center md:justify-start space-x-2">
             <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-medium">
               {book.genre}
             </span>
@@ -188,6 +194,8 @@ const BookDetail = () => {
               <span>Add to Library</span>
             </button>
           )}
+        </div>
+        </div>
         </div>
       </main>
     </div>

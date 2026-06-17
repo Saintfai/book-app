@@ -71,7 +71,7 @@ const Index = () => {
                     <Plus size={20} />
                   </button>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6">
                   {books.slice(0, 6).map((book) => (
                     <div key={book.id} onClick={() => navigate(`/books/${book.id}`)} className="cursor-pointer">
                       <BookCard book={book} variant="library" />
@@ -101,7 +101,7 @@ const Index = () => {
               />
             </div>
             <h2 className="text-xl font-bold text-gray-800">Trending Now</h2>
-            <div className="space-y-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {books.slice(3, 8).map((book) => (
                 <div key={book.id} onClick={() => navigate(`/books/${book.id}`)} className="cursor-pointer">
                   <BookCard book={book} variant="discover" />
@@ -114,7 +114,7 @@ const Index = () => {
         return (
           <div className="space-y-4">
             <h2 className="text-xl font-bold text-gray-800">Currently Reading</h2>
-            <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {currentlyReading.map((book) => (
                 <ProgressCard key={book.id} book={book} />
               ))}
@@ -132,7 +132,7 @@ const Index = () => {
               <p className="text-gray-600">Reading enthusiast since 2020</p>
             </div>
             
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 md:max-w-2xl md:mx-auto gap-4">
               <div className="text-center p-4 bg-blue-50 rounded-xl">
                 <div className="text-2xl font-bold text-blue-600">{readingStats.totalBooks}</div>
                 <div className="text-sm text-gray-600">Books Read</div>
@@ -161,7 +161,7 @@ const Index = () => {
 
             <div>
               <h3 className="text-lg font-semibold text-gray-800 mb-3">Continue Reading</h3>
-              <div className="space-y-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {currentlyReading.slice(0, 2).map((book) => (
                   <ProgressCard key={book.id} book={book} />
                 ))}
@@ -170,7 +170,7 @@ const Index = () => {
 
             <div>
               <h3 className="text-lg font-semibold text-gray-800 mb-3">Recommended for You</h3>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
                 {books.slice(0, 4).map((book) => (
                   <div key={book.id} onClick={() => navigate(`/books/${book.id}`)} className="cursor-pointer">
                     <BookCard book={book} variant="compact" />
@@ -184,10 +184,10 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 max-w-md mx-auto">
-      <HeaderNav activeTab={activeTab} />
+    <div className="min-h-screen bg-gray-50 max-w-md md:max-w-7xl mx-auto md:px-6">
+      <HeaderNav activeTab={activeTab} setActiveTab={setActiveTab} />
       
-      <main className="px-4 py-6 pb-20">
+      <main className="px-4 md:px-0 py-6 pb-20 md:pb-6">
         {renderContent()}
       </main>
 

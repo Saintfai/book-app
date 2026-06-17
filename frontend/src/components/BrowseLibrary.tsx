@@ -147,9 +147,9 @@ const BrowseLibrary = () => {
       </p>
 
       {/* Books Grid */}
-      <div className="space-y-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         {filteredBooks.map((book) => (
-          <div key={book.id} className="relative cursor-pointer" onClick={() => navigate(`/books/${book.id}`)}>
+          <div key={book.id} className="relative cursor-pointer h-full" onClick={() => navigate(`/books/${book.id}`)}>
             <BookCard book={book} variant="discover" />
             {book.status === 'want-to-read' ? (
               <button 
