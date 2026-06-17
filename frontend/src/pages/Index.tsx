@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Book, Search, User, TrendingUp, Plus, Library } from 'lucide-react';
 import BookCard from '../components/BookCard';
 import ProgressCard from '../components/ProgressCard';
@@ -8,8 +9,24 @@ import BrowseLibrary from '../components/BrowseLibrary';
 import { books, currentlyReading, readingStats } from '../data/dummyData';
 
 const Index = () => {
-  const [activeTab, setActiveTab] = useState('home');
-  const [libraryView, setLibraryView] = useState('my-books'); // 'my-books' or 'browse'
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeTab = searchParams.get('tab') || 'home';
+  const libraryView = searchParams.get('view') || 'my-books';
+
+  const setActiveTab = (tab: string) => {
+    setSearchParams(prev => {
+      prev.set('tab', tab);
+      return prev;
+    }, { replace: true });
+  };
+
+  const setLibraryView = (view: string) => {
+    setSearchParams(prev => {
+      prev.set('view', view);
+      return prev;
+    }, { replace: true });
+  };
 
   const renderContent = () => {
     switch (activeTab) {
@@ -56,7 +73,9 @@ const Index = () => {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   {books.slice(0, 6).map((book) => (
-                    <BookCard key={book.id} book={book} variant="library" />
+                    <div key={book.id} onClick={() => navigate(`/books/${book.id}`)} className="cursor-pointer">
+                      <BookCard book={book} variant="library" />
+                    </div>
                   ))}
                 </div>
               </div>
@@ -79,7 +98,9 @@ const Index = () => {
             <h2 className="text-xl font-bold text-gray-800">Trending Now</h2>
             <div className="space-y-3">
               {books.slice(3, 8).map((book) => (
-                <BookCard key={book.id} book={book} variant="discover" />
+                <div key={book.id} onClick={() => navigate(`/books/${book.id}`)} className="cursor-pointer">
+                  <BookCard book={book} variant="discover" />
+                </div>
               ))}
             </div>
           </div>
@@ -146,7 +167,9 @@ const Index = () => {
               <h3 className="text-lg font-semibold text-gray-800 mb-3">Recommended for You</h3>
               <div className="grid grid-cols-2 gap-3">
                 {books.slice(0, 4).map((book) => (
-                  <BookCard key={book.id} book={book} variant="compact" />
+                  <div key={book.id} onClick={() => navigate(`/books/${book.id}`)} className="cursor-pointer">
+                    <BookCard book={book} variant="compact" />
+                  </div>
                 ))}
               </div>
             </div>
